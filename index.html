@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>WhatsApp Audit Log — Olympic Paints</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>var t=localStorage.getItem('oly-theme');if(t)document.documentElement.className=t;</script>
+<style>
+:root {
+  --_y50:#FEF9E0; --_y100:#FDF0A0; --_y200:#FAE04D;
+  --_y400:#F5C400; --_y600:#D4A800; --_y800:#A88000; --_y900:#6A5000;
+  --_n50:#E8EFF8; --_n100:#B8CCE8; --_n300:#6B9ED0;
+  --_n500:#2D6BA8; --_n700:#1A3D6E; --_n900:#0D2040; --_n950:#071022;
+  --_g0:#FFFFFF; --_g50:#F7F6F3; --_g100:#E8E7E2; --_g200:#C8C7C0;
+  --_g400:#949390; --_g600:#5C5B58; --_g800:#2E2E2C;
+  --_g900:#1A1A18; --_g950:#0D0D0B;
+  --_teal:#2D8C7A; --_teal-light:#C8EDE7; --_teal-dark:#1a5c50;
+  --_terra:#C97A3A; --_terra-light:#F7E0C8;
+  --_coral:#E86060; --_coral-light:#FDDCDC;
+  --_pink:#E87BAD; --_pink-light:#FCE4EF;
+  --_violet:#9B7DBF; --_violet-light:#EDE0F7;
+  --_sage:#7A8C55; --_ink:#5C6B7A;
+  --font-display:'Barlow Condensed',sans-serif;
+  --font-body:'Barlow',sans-serif;
+  --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:50px;
+}
+.theme-light {
+  color-scheme:light;
+  --color-surface-page:var(--_g50); --color-surface-base:var(--_g0);
+  --color-surface-elevated:var(--_g0); --color-surface-sunken:var(--_g100);
+  --color-surface-overlay:rgba(0,0,0,0.04);
+  --color-surface-brand:var(--_y400); --color-surface-secondary:var(--_n700);
+  --color-text-primary:var(--_g950); --color-text-secondary:var(--_g600);
+  --color-text-tertiary:var(--_g400); --color-text-on-brand:var(--_g950);
+  --color-text-on-navy:var(--_g0);
+  --color-brand-primary:var(--_y400); --color-brand-hover:var(--_y600);
+  --color-brand-secondary:var(--_n700); --color-brand-accent:var(--_y400);
+  --color-border-subtle:var(--_g100); --color-border-default:var(--_g200);
+  --color-border-strong:var(--_g400); --color-border-brand:var(--_y400);
+  --color-success-bg:#EDF7F5; --color-success-fg:var(--_teal-dark); --color-success-bd:var(--_teal);
+  --color-warning-bg:var(--_y50); --color-warning-fg:var(--_y900); --color-warning-bd:var(--_y600);
+  --color-danger-bg:#FEF2F2; --color-danger-fg:#C0392B; --color-danger-bd:var(--_coral);
+  --color-info-bg:var(--_n50); --color-info-fg:var(--_n700); --color-info-bd:var(--_n500);
+  --color-neutral-bg:var(--_g100); --color-neutral-fg:var(--_g600); --color-neutral-bd:var(--_g400);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.08); --shadow-md:0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg:0 10px 30px rgba(0,0,0,0.10); --shadow-brand:0 4px 16px rgba(245,196,0,0.20);
+}
+.theme-dark {
+  color-scheme:dark;
+  --color-surface-page:var(--_g950); --color-surface-base:var(--_g900);
+  --color-surface-elevated:var(--_g800); --color-surface-sunken:var(--_g950);
+  --color-surface-overlay:rgba(255,255,255,0.04);
+  --color-surface-brand:var(--_y400); --color-surface-secondary:var(--_n700);
+  --color-text-primary:var(--_g100); --color-text-secondary:var(--_g400);
+  --color-text-tertiary:var(--_g600); --color-text-on-brand:var(--_g950);
+  --color-text-on-navy:var(--_g0);
+  --color-brand-primary:var(--_y400); --color-brand-hover:var(--_y200);
+  --color-brand-secondary:var(--_n700); --color-brand-accent:var(--_y400);
+  --color-border-subtle:rgba(255,255,255,0.06); --color-border-default:rgba(255,255,255,0.10);
+  --color-border-strong:rgba(255,255,255,0.20); --color-border-brand:var(--_y400);
+  --color-success-bg:rgba(45,140,122,0.12); --color-success-fg:var(--_teal-light); --color-success-bd:rgba(45,140,122,0.30);
+  --color-warning-bg:rgba(245,196,0,0.10); --color-warning-fg:var(--_y200); --color-warning-bd:rgba(245,196,0,0.25);
+  --color-danger-bg:rgba(232,96,96,0.12); --color-danger-fg:var(--_coral-light); --color-danger-bd:rgba(232,96,96,0.30);
+  --color-info-bg:rgba(26,61,110,0.30); --color-info-fg:var(--_n100); --color-info-bd:rgba(107,158,208,0.30);
+  --color-neutral-bg:rgba(255,255,255,0.05); --color-neutral-fg:var(--_g400); --color-neutral-bd:rgba(255,255,255,0.10);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.40); --shadow-md:0 4px 12px rgba(0,0,0,0.40);
+  --shadow-lg:0 10px 30px rgba(0,0,0,0.50); --shadow-brand:0 4px 20px rgba(245,196,0,0.15);
+}
+.theme-brand {
+  color-scheme:light;
+  --color-surface-page:var(--_y400); --color-surface-base:var(--_y200);
+  --color-surface-elevated:var(--_y50); --color-surface-sunken:var(--_y600);
+  --color-surface-overlay:rgba(0,0,0,0.05);
+  --color-surface-brand:var(--_y400); --color-surface-secondary:var(--_g950);
+  --color-text-primary:var(--_g950); --color-text-secondary:var(--_y900);
+  --color-text-tertiary:var(--_y800); --color-text-on-brand:var(--_g950);
+  --color-text-on-navy:var(--_g0);
+  --color-brand-primary:var(--_g950); --color-brand-hover:var(--_n700);
+  --color-brand-secondary:var(--_n700); --color-brand-accent:var(--_g950);
+  --color-border-subtle:rgba(0,0,0,0.08); --color-border-default:rgba(0,0,0,0.14);
+  --color-border-strong:rgba(0,0,0,0.25); --color-border-brand:var(--_g950);
+  --color-success-bg:rgba(45,140,122,0.12); --color-success-fg:var(--_teal-dark); --color-success-bd:var(--_teal);
+  --color-warning-bg:rgba(0,0,0,0.08); --color-warning-fg:var(--_y900); --color-warning-bd:var(--_y900);
+  --color-danger-bg:rgba(232,96,96,0.12); --color-danger-fg:#C0392B; --color-danger-bd:var(--_coral);
+  --color-info-bg:rgba(26,61,110,0.10); --color-info-fg:var(--_n900); --color-info-bd:var(--_n700);
+  --color-neutral-bg:rgba(0,0,0,0.06); --color-neutral-fg:var(--_y900); --color-neutral-bd:rgba(0,0,0,0.15);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.12); --shadow-md:0 4px 12px rgba(0,0,0,0.14);
+  --shadow-lg:0 10px 30px rgba(0,0,0,0.18); --shadow-brand:0 4px 16px rgba(0,0,0,0.15);
+}
+.theme-navy {
+  color-scheme:dark;
+  --color-surface-page:var(--_n950); --color-surface-base:var(--_n900);
+  --color-surface-elevated:var(--_n700); --color-surface-sunken:var(--_n950);
+  --color-surface-overlay:rgba(255,255,255,0.04);
+  --color-surface-brand:var(--_y400); --color-surface-secondary:var(--_n700);
+  --color-text-primary:var(--_g0); --color-text-secondary:var(--_n100);
+  --color-text-tertiary:var(--_n300); --color-text-on-brand:var(--_g950);
+  --color-text-on-navy:var(--_g0);
+  --color-brand-primary:var(--_y400); --color-brand-hover:var(--_y200);
+  --color-brand-secondary:var(--_n500); --color-brand-accent:var(--_y400);
+  --color-border-subtle:rgba(107,158,208,0.12); --color-border-default:rgba(107,158,208,0.20);
+  --color-border-strong:rgba(107,158,208,0.35); --color-border-brand:var(--_y400);
+  --color-success-bg:rgba(45,140,122,0.15); --color-success-fg:var(--_teal-light); --color-success-bd:rgba(45,140,122,0.35);
+  --color-warning-bg:rgba(245,196,0,0.12); --color-warning-fg:var(--_y200); --color-warning-bd:rgba(245,196,0,0.30);
+  --color-danger-bg:rgba(232,96,96,0.14); --color-danger-fg:var(--_coral-light); --color-danger-bd:rgba(232,96,96,0.35);
+  --color-info-bg:rgba(45,107,168,0.20); --color-info-fg:var(--_n100); --color-info-bd:rgba(107,158,208,0.35);
+  --color-neutral-bg:rgba(255,255,255,0.05); --color-neutral-fg:var(--_n300); --color-neutral-bd:rgba(255,255,255,0.12);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.50); --shadow-md:0 4px 12px rgba(0,0,0,0.50);
+  --shadow-lg:0 10px 30px rgba(0,0,0,0.60); --shadow-brand:0 4px 20px rgba(245,196,0,0.18);
+}
+
+* { box-sizing:border-box; }
+body { margin:0; }
+.theme-bar { display:flex; gap:4px; padding:8px 16px; background:var(--color-surface-secondary); }
+.theme-bar button {
+  font-family:var(--font-display); font-weight:700; font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; padding:5px 12px; border-radius:var(--r-pill);
+  border:1px solid transparent; background:transparent; color:var(--color-text-on-navy);
+  opacity:.65; cursor:pointer;
+}
+.theme-bar button.active { background:var(--color-brand-primary); color:var(--color-text-on-brand); opacity:1; }
+.wrap { max-width:1240px; margin:0 auto; padding:24px 20px 64px; }
+header.page { display:flex; align-items:center; gap:16px; margin:8px 0 24px; }
+header.page h1 {
+  font-family:var(--font-display); font-weight:900; text-transform:uppercase;
+  font-size:34px; line-height:1; margin:0; letter-spacing:.01em;
+}
+header.page .sub { font-size:13px; color:var(--color-text-secondary); margin-top:4px; }
+.eyebrow {
+  font-family:var(--font-display); font-weight:700; font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--color-text-tertiary);
+}
+.kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:24px; }
+.kpi {
+  background:var(--color-surface-base); border:1px solid var(--color-border-subtle);
+  border-radius:var(--r-lg); padding:16px 18px; box-shadow:var(--shadow-sm);
+}
+.kpi .label { font-family:var(--font-body); font-weight:500; font-size:11px; text-transform:uppercase;
+  letter-spacing:.08em; color:var(--color-text-secondary); }
+.kpi .num { font-family:var(--font-display); font-weight:900; font-size:34px; line-height:1.1; margin-top:6px; }
+.kpi.success .num { color:var(--color-success-fg); }
+.kpi.danger .num { color:var(--color-danger-fg); }
+.kpi.brand .num { color:var(--color-brand-primary); }
+.grid2 { display:grid; grid-template-columns:2fr 1fr; gap:16px; margin-bottom:24px; }
+@media (max-width:880px) { .grid2 { grid-template-columns:1fr; } }
+.card {
+  background:var(--color-surface-base); border:1px solid var(--color-border-subtle);
+  border-radius:var(--r-lg); padding:18px; box-shadow:var(--shadow-sm);
+}
+.card h2 {
+  font-family:var(--font-display); font-weight:800; text-transform:uppercase;
+  font-size:16px; margin:0 0 14px; letter-spacing:.04em;
+}
+.controls { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:14px; }
+.controls input, .controls select {
+  font-family:var(--font-body); font-size:13px; padding:8px 12px; border-radius:var(--r-md);
+  border:1px solid var(--color-border-default); background:var(--color-surface-base);
+  color:var(--color-text-primary);
+}
+.controls input { flex:1; min-width:200px; }
+.controls input:focus, .controls select:focus { outline:2px solid var(--color-brand-primary); outline-offset:2px; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+thead th {
+  position:sticky; top:0; background:var(--color-surface-elevated); z-index:1;
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase; font-size:11px;
+  letter-spacing:.06em; text-align:left; padding:10px 12px; color:var(--color-text-secondary);
+  border-bottom:1px solid var(--color-border-default);
+}
+tbody td { padding:9px 12px; border-bottom:1px solid var(--color-border-subtle); vertical-align:top; }
+tbody tr:nth-child(even) { background:var(--color-surface-sunken); }
+.body-cell { max-width:420px; white-space:pre-wrap; word-break:break-word; color:var(--color-text-secondary); }
+.badge {
+  display:inline-block; font-family:var(--font-display); font-weight:700; font-size:10px;
+  letter-spacing:.06em; text-transform:uppercase; padding:3px 9px; border-radius:var(--r-pill);
+  border:1px solid;
+}
+.badge.sent { background:var(--color-success-bg); color:var(--color-success-fg); border-color:var(--color-success-bd); }
+.badge.failed { background:var(--color-danger-bg); color:var(--color-danger-fg); border-color:var(--color-danger-bd); }
+.badge.image { background:var(--color-info-bg); color:var(--color-info-fg); border-color:var(--color-info-bd); }
+.badge.text { background:var(--color-neutral-bg); color:var(--color-neutral-fg); border-color:var(--color-neutral-bd); }
+.tag { font-family:var(--font-body); font-weight:600; font-size:11px; color:var(--color-text-tertiary); }
+.rep { font-weight:600; }
+.num-recip { font-size:11px; color:var(--color-text-tertiary); }
+.empty { text-align:center; padding:40px; color:var(--color-text-tertiary); }
+footer { margin-top:28px; text-align:center; font-size:12px; color:var(--color-text-tertiary); }
+a { color:var(--color-brand-primary); }
+.tablecard { overflow:auto; max-height:70vh; }
+</style>
+</head>
+<body style="background:var(--color-surface-page);color:var(--color-text-primary);font-family:var(--font-body);">
+
+  <div class="theme-bar">
+    <button onclick="olyTheme('theme-light',this)">Light</button>
+    <button onclick="olyTheme('theme-dark',this)" class="active">Dark</button>
+    <button onclick="olyTheme('theme-brand',this)">Brand</button>
+    <button onclick="olyTheme('theme-navy',this)">Navy</button>
+  </div>
+
+  <div class="wrap">
+    <header class="page">
+      <div style="width:48px;height:48px;border-radius:50%;overflow:hidden;flex-shrink:0;">
+        <img src="logo.jpg" alt="Olympic Paints" width="48" height="48" style="display:block;width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div>
+        <div class="eyebrow">WhatsApp Platform · Make Scenario 9301106</div>
+        <h1>WhatsApp Audit Log</h1>
+        <div class="sub">Last message: 09 Jun 2026 · 08:00 &nbsp;·&nbsp; Generated 09 Jun 2026 · 11:30 SAST</div>
+      </div>
+    </header>
+
+    <div class="kpis">
+      <div class="kpi brand"><div class="label">Total sends</div><div class="num">24</div></div>
+      <div class="kpi success"><div class="label">Delivered</div><div class="num">24</div></div>
+      <div class="kpi success"><div class="label">Failed</div><div class="num">0</div></div>
+      <div class="kpi"><div class="label">Success rate</div><div class="num">100%</div></div>
+      <div class="kpi"><div class="label">Images</div><div class="num">11</div></div>
+      <div class="kpi"><div class="label">Text</div><div class="num">13</div></div>
+      <div class="kpi"><div class="label">Recipients</div><div class="num">6</div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h2>Daily Volume</h2>
+        <canvas id="dailyChart" height="120"></canvas>
+      </div>
+      <div class="card">
+        <h2>By System</h2>
+        <canvas id="srcChart" height="120"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Message Log</h2>
+      <div class="controls">
+        <input id="search" type="text" placeholder="Search body, recipient, rep, message ID…">
+        <select id="fStatus"><option value="">All statuses</option><option value="sent">Sent</option><option value="failed">Failed</option></select>
+        <select id="fType"><option value="">All types</option><option value="text">Text</option><option value="image">Image</option></select>
+        <select id="fSource"><option value="">All systems</option><option value="CI Verification">CI Verification</option><option value="PULSE">PULSE</option></select>
+        <span class="tag" id="count"></span>
+      </div>
+      <div class="tablecard">
+        <table>
+          <thead><tr>
+            <th>When (SAST)</th><th>Recipient</th><th>Type</th><th>System</th><th>Status</th><th>Body</th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>Olympic Paints — WhatsApp Audit Log · data via Supabase whatsapp_audit_log · 24 records</footer>
+  </div>
+
+<script>
+const OLY_THEMES=['theme-light','theme-dark','theme-brand','theme-navy'];
+function olyTheme(t,btn){
+  document.documentElement.classList.remove(...OLY_THEMES);
+  document.documentElement.classList.add(t);
+  localStorage.setItem('oly-theme',t);
+  document.querySelectorAll('.theme-bar button').forEach(b=>b.classList.toggle('active',b===btn));
+}
+(function(){var t=localStorage.getItem('oly-theme')||'theme-dark';
+  document.querySelectorAll('.theme-bar button').forEach(b=>b.classList.toggle('active',b.getAttribute('onclick').includes(t)));})();
+
+const DATA = [{"when": "09 Jun 08:00", "ts": "2026-06-09T06:00:16.729499+00:00", "recipient": "27828991826", "rep": "Nikhil Panchal", "type": "text", "source": "CI Verification", "status": "sent", "body": "*Nikhil, here are your next forms:*\n\n• Excelsior — Pva\n  https://tinyurl.com/29ashxro\n• Excelsior — Waterproofing\n  https://tinyurl.com/29aec5p8\n\nTap a link to open. Note: links will show a 5-second redirect screen before opening the form — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjYVAgARGBJBNUY1NzU0NjI5N0I5NkY3NTIA", "error": ""}, {"when": "09 Jun 08:00", "ts": "2026-06-09T06:00:12.910134+00:00", "recipient": "27828991826", "rep": "Nikhil Panchal", "type": "image", "source": "CI Verification", "status": "sent", "body": "CI Verification — Nikhil Panchal\nTue 09 Jun 2026\n\n0/15 submitted  ·  15 still outstanding", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/ci-matrix/NP_Tue_09_Jun_2026_1780984809.png", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjYVAgARGBJCQTBFQkM4REI2Q0FBRDJCNEUA", "error": ""}, {"when": "09 Jun 07:50", "ts": "2026-06-09T05:50:33.216235+00:00", "recipient": "27604987117", "rep": "Byron Minnie", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Byron!* 📊\n\nTarget reached! Outstanding work.\n\n*Today's plan:*\n  https://tinyurl.com/26jeh25k\n\n*Full dashboard:*\n  https://tinyurl.com/26toyfw8\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc2MDQ5ODcxMTcVAgARGBI1MDcyQzc3RUJERkVBOTVCNUMA", "error": ""}, {"when": "09 Jun 07:50", "ts": "2026-06-09T05:50:27.989543+00:00", "recipient": "27604987117", "rep": "Byron Minnie", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Byron Minnie\nTue 09 Jun 2026\n\nMTD: R 2,607  ·  168.1% of target\nRank #1 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/BM_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc2MDQ5ODcxMTcVAgARGBJEODhGQTcxNEY1NDAwQTdBQzkA", "error": ""}, {"when": "09 Jun 07:50", "ts": "2026-06-09T05:50:24.268617+00:00", "recipient": "27828991826", "rep": "Nikhil Panchal", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Nikhil!* 📊\n\nR 4,314,115 still to go — push hard today.\n\n*Today's plan:*\n  https://tinyurl.com/2dhcxcch\n\n*Full dashboard:*\n  https://tinyurl.com/23u47qlo\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjYVAgARGBJBMDA3OUYxNkM1MEJBODVFRjIA", "error": ""}, {"when": "09 Jun 07:50", "ts": "2026-06-09T05:50:18.329779+00:00", "recipient": "27828991826", "rep": "Nikhil Panchal", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Nikhil Panchal\nTue 09 Jun 2026\n\nMTD: R 853,780  ·  16.5% of target\nRank #3 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/NP_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjYVAgARGBIyMTNFRjQ4N0E0NEU2QUQyRTQA", "error": ""}, {"when": "09 Jun 07:50", "ts": "2026-06-09T05:50:15.06159+00:00", "recipient": "27826173879", "rep": "Bhadresh Vallabh", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Bhadresh!* 📊\n\nR 4,651,243 still to go — push hard today.\n\n*Today's plan:*\n  https://tinyurl.com/28dxvalx\n\n*Full dashboard:*\n  https://tinyurl.com/2yc3eytn\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4MjYxNzM4NzkVAgARGBJEQjhFNUJENzE5REU3RDI0M0YA", "error": ""}, {"when": "09 Jun 07:50", "ts": "2026-06-09T05:50:10.18891+00:00", "recipient": "27826173879", "rep": "Bhadresh Vallabh", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Bhadresh Vallabh\nTue 09 Jun 2026\n\nMTD: R 648,203  ·  12.2% of target\nRank #5 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/BV_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc4MjYxNzM4NzkVAgARGBIwOUNGOUYzN0I1QzMzOUFGMDUA", "error": ""}, {"when": "09 Jun 07:50", "ts": "2026-06-09T05:50:06.557911+00:00", "recipient": "27828991825", "rep": "Amit Patel", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Amit!* 📊\n\nR 1,023,295 still to go — push hard today.\n\n*Today's plan:*\n  https://tinyurl.com/25xzo4yv\n\n*Full dashboard:*\n  https://tinyurl.com/25je6zc9\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjUVAgARGBI1Mzk1MDlENzUwMjJBQkIyNkMA", "error": ""}, {"when": "09 Jun 07:50", "ts": "2026-06-09T05:50:01.220571+00:00", "recipient": "27828991825", "rep": "Amit Patel", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Amit Patel\nTue 09 Jun 2026\n\nMTD: R 197,708  ·  16.2% of target\nRank #4 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/AP_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjUVAgARGBJGQTcxNzFGMzNEOUI3RTMwNEIA", "error": ""}, {"when": "09 Jun 07:49", "ts": "2026-06-09T05:49:58.007691+00:00", "recipient": "27835889057", "rep": "Aboo Cassim", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Aboo!* 📊\n\nR 1,145,988 still to go — push hard today.\n\n*Today's plan:*\n  https://tinyurl.com/22sdatzf\n\n*Full dashboard:*\n  https://tinyurl.com/28jyx7mq\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4MzU4ODkwNTcVAgARGBJFQUQ4M0MzRDgwRTlGQTU0QTcA", "error": ""}, {"when": "09 Jun 07:49", "ts": "2026-06-09T05:49:52.27705+00:00", "recipient": "27835889057", "rep": "Aboo Cassim", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Aboo Cassim\nTue 09 Jun 2026\n\nMTD: R 350,893  ·  23.4% of target\nRank #2 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/AC_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc4MzU4ODkwNTcVAgARGBJGRUU3NzdDN0U2RDQ4MkY0NTEA", "error": ""}, {"when": "09 Jun 07:07", "ts": "2026-06-09T05:07:02.646014+00:00", "recipient": "27604987117", "rep": "Byron Minnie", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Byron!* 📊\n\nTarget reached! Outstanding work.\n\n*Today's plan:*\n  https://tinyurl.com/26jeh25k\n\n*Full dashboard:*\n  https://tinyurl.com/26toyfw8\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc2MDQ5ODcxMTcVAgARGBJDN0Q0QkJGNzhCRjU0MEQyMzIA", "error": ""}, {"when": "09 Jun 07:06", "ts": "2026-06-09T05:06:58.35296+00:00", "recipient": "27604987117", "rep": "Byron Minnie", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Byron Minnie\nTue 09 Jun 2026\n\nMTD: R 2,607  ·  168.1% of target\nRank #1 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/BM_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc2MDQ5ODcxMTcVAgARGBJGRDhDNUEzOUY3Njc3MEJGRkEA", "error": ""}, {"when": "09 Jun 07:06", "ts": "2026-06-09T05:06:55.398947+00:00", "recipient": "27828991826", "rep": "Nikhil Panchal", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Nikhil!* 📊\n\nR 4,314,115 still to go — push hard today.\n\n*Today's plan:*\n  https://tinyurl.com/2dhcxcch\n\n*Full dashboard:*\n  https://tinyurl.com/23u47qlo\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjYVAgARGBI2MjNDOUNGNzVCMEMzQTMwQUEA", "error": ""}, {"when": "09 Jun 07:06", "ts": "2026-06-09T05:06:51.289011+00:00", "recipient": "27828991826", "rep": "Nikhil Panchal", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Nikhil Panchal\nTue 09 Jun 2026\n\nMTD: R 853,780  ·  16.5% of target\nRank #3 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/NP_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjYVAgARGBJCQjJFREQ2MTc2QzU1RDJDQzYA", "error": ""}, {"when": "09 Jun 07:06", "ts": "2026-06-09T05:06:48.108402+00:00", "recipient": "27826173879", "rep": "Bhadresh Vallabh", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Bhadresh!* 📊\n\nR 4,651,243 still to go — push hard today.\n\n*Today's plan:*\n  https://tinyurl.com/28dxvalx\n\n*Full dashboard:*\n  https://tinyurl.com/2yc3eytn\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4MjYxNzM4NzkVAgARGBJBMkI1NUI2OTI0NjYxNzgyN0YA", "error": ""}, {"when": "09 Jun 07:06", "ts": "2026-06-09T05:06:43.566836+00:00", "recipient": "27826173879", "rep": "Bhadresh Vallabh", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Bhadresh Vallabh\nTue 09 Jun 2026\n\nMTD: R 648,203  ·  12.2% of target\nRank #5 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/BV_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc4MjYxNzM4NzkVAgARGBJENTAwQ0JCQ0M3REM2N0NCMzMA", "error": ""}, {"when": "09 Jun 07:06", "ts": "2026-06-09T05:06:40.040043+00:00", "recipient": "27828991825", "rep": "Amit Patel", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Amit!* 📊\n\nR 1,023,295 still to go — push hard today.\n\n*Today's plan:*\n  https://tinyurl.com/25xzo4yv\n\n*Full dashboard:*\n  https://tinyurl.com/25je6zc9\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjUVAgARGBI4QTZCRDc4MEMzQjg2MzVFREYA", "error": ""}, {"when": "09 Jun 07:06", "ts": "2026-06-09T05:06:35.801836+00:00", "recipient": "27828991825", "rep": "Amit Patel", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Amit Patel\nTue 09 Jun 2026\n\nMTD: R 197,708  ·  16.2% of target\nRank #4 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/AP_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjUVAgARGBI2ODdFODBEQkM3NEI0REQwQUMA", "error": ""}, {"when": "09 Jun 07:06", "ts": "2026-06-09T05:06:32.039208+00:00", "recipient": "27835889057", "rep": "Aboo Cassim", "type": "text", "source": "PULSE", "status": "sent", "body": "*Good morning, Aboo!* 📊\n\nR 1,145,988 still to go — push hard today.\n\n*Today's plan:*\n  https://tinyurl.com/22sdatzf\n\n*Full dashboard:*\n  https://tinyurl.com/28jyx7mq\n\nLinks show a 5-second redirect screen — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4MzU4ODkwNTcVAgARGBI1NDgwMTYwNDQ0OEVBQTk2MTgA", "error": ""}, {"when": "09 Jun 07:06", "ts": "2026-06-09T05:06:27.421257+00:00", "recipient": "27835889057", "rep": "Aboo Cassim", "type": "image", "source": "PULSE", "status": "sent", "body": "PULSE · Aboo Cassim\nTue 09 Jun 2026\n\nMTD: R 350,893  ·  23.4% of target\nRank #2 of 5", "image_url": "https://nssufmvpdtzhybcqispv.supabase.co/storage/v1/object/public/form-uploads/pulse-cards/AC_Tue_09_Jun_2026.png?t=20260609", "wa_id": "wamid.HBgLMjc4MzU4ODkwNTcVAgARGBJEMzJFNTEyNTk5MjE1MzdEQjgA", "error": ""}, {"when": "09 Jun 07:00", "ts": "2026-06-09T05:00:22.570767+00:00", "recipient": "27748660437", "rep": "27748660437", "type": "text", "source": "CI Verification", "status": "sent", "body": "*CI Tracker — 2026-06-09*\n──────────────────────\nAC  ✓ all done\nAP  ! 14 OVERDUE · 14 total outstanding\nBV  ! 1 OVERDUE · 1 total outstanding\nNP  ! 15 OVERDUE · 15 total outstanding\nBM  ✓ all done\n──────────────────────\nTotal: 45/75 done · 30 overdue", "image_url": "", "wa_id": "wamid.HBgLMjc3NDg2NjA0MzcVAgARGBIzNUM0NTY0MjUzNDA0MTc4RjAA", "error": ""}, {"when": "08 Jun 12:00", "ts": "2026-06-08T10:00:15.276955+00:00", "recipient": "27828991826", "rep": "Nikhil Panchal", "type": "text", "source": "CI Verification", "status": "sent", "body": "*Nikhil, here are your next forms:*\n\n• Excelsior — Pva\n  https://tinyurl.com/29ashxro\n• Excelsior — Waterproofing\n  https://tinyurl.com/29aec5p8\n\nTap a link to open. Note: links will show a 5-second redirect screen before opening the form — this is normal.", "image_url": "", "wa_id": "wamid.HBgLMjc4Mjg5OTE4MjYVAgARGBI3MTQwMkUyOUIwRDMyODMwMTkA", "error": ""}];
+
+// ── Charts ────────────────────────────────────────────────────────────────
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+Chart.defaults.font.family = "'Barlow', sans-serif";
+Chart.defaults.color = css('--color-text-secondary');
+
+// barLabels plugin (per Olympic design standards)
+const _lblMap = new Map();
+const barLabels = {
+  id:'barLabels',
+  afterDatasetsDraw(chart){
+    const cfg=_lblMap.get(chart.canvasID); if(!cfg) return;
+    const {ctx}=chart;
+    chart.data.datasets.forEach((ds,di)=>{
+      const meta=chart.getDatasetMeta(di); if(meta.hidden) return;
+      meta.data.forEach((el,i)=>{
+        const v=ds.data[i]; if(v===0||v==null) return;
+        ctx.save();
+        ctx.font='700 11px "Barlow Condensed"';
+        ctx.fillStyle=css('--color-text-primary');
+        ctx.textAlign='center';
+        ctx.fillText(v, el.x, el.y-4);
+        ctx.restore();
+      });
+    });
+  }
+};
+Chart.register(barLabels);
+
+const dCanvas=document.getElementById('dailyChart'); dCanvas.canvasID='daily';
+_lblMap.set('daily',{});
+new Chart(dCanvas,{
+  type:'bar',
+  data:{ labels:["06-08", "06-09"],
+    datasets:[
+      {label:'Sent', data:[1, 23], backgroundColor:'#F5C400', borderRadius:4},
+      {label:'Failed', data:[0, 0], backgroundColor:'#E86060', borderRadius:4}
+    ]},
+  options:{responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},
+    scales:{x:{grid:{display:false}, stacked:true}, y:{beginAtZero:true, stacked:true, grid:{color:css('--color-border-subtle')}, ticks:{precision:0}}}
+  }
+});
+
+new Chart(document.getElementById('srcChart'),{
+  type:'doughnut',
+  data:{ labels:["CI Verification", "PULSE"],
+    datasets:[{data:[4, 20],
+      backgroundColor:['#F5C400','#1A3D6E','#2D8C7A','#C97A3A','#E87BAD','#9B7DBF','#5C6B7A'],
+      borderWidth:0}]},
+  options:{responsive:true, maintainAspectRatio:false, cutout:'58%',
+    plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}}
+  }
+});
+
+// ── Table ─────────────────────────────────────────────────────────────────
+const esc = s => (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const rowsEl=document.getElementById('rows');
+const countEl=document.getElementById('count');
+function render(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const fs=document.getElementById('fStatus').value;
+  const ft=document.getElementById('fType').value;
+  const fsrc=document.getElementById('fSource').value;
+  const filtered=DATA.filter(r=>{
+    if(fs && r.status!==fs) return false;
+    if(ft && r.type!==ft) return false;
+    if(fsrc && r.source!==fsrc) return false;
+    if(q){const hay=(r.body+' '+r.recipient+' '+r.rep+' '+r.wa_id+' '+r.error).toLowerCase();
+      if(!hay.includes(q)) return false;}
+    return true;
+  });
+  countEl.textContent=filtered.length+' of '+DATA.length+' shown';
+  if(!filtered.length){ rowsEl.innerHTML='<tr><td colspan="6" class="empty">No matching messages.</td></tr>'; return; }
+  rowsEl.innerHTML=filtered.map(r=>{
+    const repLine = r.rep!==r.recipient
+      ? `<span class="rep">${esc(r.rep)}</span><br><span class="num-recip">${esc(r.recipient)}</span>`
+      : `<span class="rep">${esc(r.recipient)}</span>`;
+    const img = r.image_url ? `<br><a href="${esc(r.image_url)}" target="_blank" rel="noopener">image ↗</a>` : '';
+    const err = r.error ? `<br><span class="badge failed">err</span> ${esc(r.error)}` : '';
+    return `<tr>
+      <td style="white-space:nowrap">${esc(r.when)}</td>
+      <td>${repLine}</td>
+      <td><span class="badge ${r.type}">${esc(r.type)}</span></td>
+      <td><span class="tag">${esc(r.source)}</span></td>
+      <td><span class="badge ${r.status}">${esc(r.status)}</span></td>
+      <td class="body-cell">${esc(r.body)}${img}${err}</td>
+    </tr>`;
+  }).join('');
+}
+['search','fStatus','fType','fSource'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+render();
+</script>
+</body>
+</html>
